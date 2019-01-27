@@ -26,6 +26,7 @@ public class ReceiptExcel extends javax.swing.JFrame {
                         jTextField_SummUS.getText()); // Вызов метода создания отчета
                 Desktop.getDesktop().open(new File(dir + "receipt.xls")); // Запуск отчета в MS Excel
             } catch (Exception ex) {
+                System.err.println("Error modifData!");
             }
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         }
@@ -82,6 +83,7 @@ public class ReceiptExcel extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Квитанция в Excel");
         setResizable(false);
         getContentPane().setLayout(null);
 

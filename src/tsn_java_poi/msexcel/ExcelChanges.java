@@ -21,6 +21,8 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import static java.lang.System.exit;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.poi.hssf.extractor.ExcelExtractor;
 import org.apache.poi.ss.usermodel.CellType;
 import static org.apache.poi.ss.usermodel.CellType.NUMERIC;
@@ -150,15 +152,19 @@ public class ExcelChanges {
         System.out.println(text); // Вывод содержимого документа MS ExcelChanges на экран
     }
 
-    public static void main(String... args) throws IOException {
-        String dir = new File(".").getAbsoluteFile().getParentFile().getAbsolutePath()
-                + System.getProperty("file.separator"); // Узнаем текущий каталог
-        ExcelChanges excel = new ExcelChanges();
-        excel.writeData(dir + "input.xls"); // Создание на диске документа MS ExcelChanges
-        excel.modifData(dir + "input.xls", dir + "output.xls"); // Модификация данных в документе MS ExcelChanges
-        System.out.println(excel.readData(dir + "output.xls")); // Вывод содержимого документа MS ExcelChanges на экран
-        excel.extractor(dir + "output.xls"); // Извлечение данных из документа MS ExcelChanges
-        Desktop.getDesktop().open(new File(dir + "output.xls")); // Запуск документа в MS ExcelChanges
+    public static void main(String... args) {
+        try {
+            String dir = new File(".").getAbsoluteFile().getParentFile().getAbsolutePath()
+                    + System.getProperty("file.separator"); // Узнаем текущий каталог
+            ExcelChanges excel = new ExcelChanges();
+            excel.writeData(dir + "input.xls"); // Создание на диске документа MS ExcelChanges
+            excel.modifData(dir + "input.xls", dir + "output.xls"); // Модификация данных в документе MS ExcelChanges
+            System.out.println(excel.readData(dir + "output.xls")); // Вывод содержимого документа MS ExcelChanges на экран
+            excel.extractor(dir + "output.xls"); // Извлечение данных из документа MS ExcelChanges
+            Desktop.getDesktop().open(new File(dir + "output.xls")); // Запуск документа в MS ExcelChanges
+        } catch (IOException ex) {
+            System.err.println("Error!");
+        }
     }
 
 }
