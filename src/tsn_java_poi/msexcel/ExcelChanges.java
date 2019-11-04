@@ -38,7 +38,7 @@ public class ExcelChanges {
     String readData(String filename) {
 
         String result = ""; // Строка со значениями из таблицы MS Excel
-        HSSFWorkbook wb = null; // Рабочая книга MS ExcelChanges
+        HSSFWorkbook wb = null; // Рабочая книга MS Excel
 
         try {
             wb = new HSSFWorkbook(new FileInputStream(filename)); // Подключение к MS Excel
