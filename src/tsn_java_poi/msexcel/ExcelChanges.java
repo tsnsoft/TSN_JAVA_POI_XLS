@@ -30,24 +30,24 @@ import static org.apache.poi.ss.usermodel.CellType.NUMERIC;
 public class ExcelChanges {
 
     /**
-     * Чтение данных из документа MS ExcelChanges
+     * Чтение данных из документа MS Excel
      *
      * @param filename имя файла для чтения
      * @return
      */
     String readData(String filename) {
 
-        String result = ""; // Строка со значениями из таблицы MS ExcelChanges
+        String result = ""; // Строка со значениями из таблицы MS Excel
         HSSFWorkbook wb = null; // Рабочая книга MS ExcelChanges
 
         try {
-            wb = new HSSFWorkbook(new FileInputStream(filename)); // Подключение к MS ExcelChanges
+            wb = new HSSFWorkbook(new FileInputStream(filename)); // Подключение к MS Excel
         } catch (IOException e) {
             System.err.println("File not found!");
             exit(-1); // Выход при ошибке доступа к файлу
         }
 
-        Sheet sheet = wb.getSheetAt(0); // Лист ExcelChanges
+        Sheet sheet = wb.getSheetAt(0); // Лист Excel
         Iterator<Row> it = sheet.iterator(); // Итератор строк (цикл по строкам)
         while (it.hasNext()) { // Цикл по строкам текущего листа
             Row row = it.next(); // Текущая строка
@@ -78,13 +78,13 @@ public class ExcelChanges {
     }
 
     /**
-     * Запись данных в документ MS ExcelChanges
+     * Запись данных в документ MS Excel
      *
      * @param filename имя файла для записи
      */
     void writeData(String filename) {
-        HSSFWorkbook workbook = new HSSFWorkbook(); // Документ MS ExcelChanges
-        Sheet sheet = workbook.createSheet(); // Лист MS ExcelChanges
+        HSSFWorkbook workbook = new HSSFWorkbook(); // Документ MS Excel
+        Sheet sheet = workbook.createSheet(); // Лист MS Excel
         HSSFDataFormat df = workbook.createDataFormat(); // Формат ячейки
         HSSFCellStyle style = workbook.createCellStyle(); // Стиль ячейки
         style.setDataFormat(df.getFormat("0.000")); // Установка формата ячейки
@@ -100,7 +100,7 @@ public class ExcelChanges {
 
         try {
             FileOutputStream out = new FileOutputStream(filename); // Поток для записи данных
-            workbook.write(out); // Запись данных в MS ExcelChanges
+            workbook.write(out); // Запись данных в MS Excel
             out.close(); // Закрытие потока записи
         } catch (IOException ex) {
         }
@@ -108,7 +108,7 @@ public class ExcelChanges {
     }
 
     /**
-     * Изменение данных в документе MS ExcelChanges
+     * Изменение данных в документе MS Excel
      *
      * @param inputFileName входной файл
      * @param outputFileName выходной файл
@@ -116,8 +116,8 @@ public class ExcelChanges {
      */
     void modifData(String inputFileName, String outputFileName) throws IOException {
         POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(inputFileName));
-        HSSFWorkbook wb = new HSSFWorkbook(fs); // Документ MS ExcelChanges
-        HSSFSheet sheet = wb.getSheetAt(0); // Лист MS ExcelChanges
+        HSSFWorkbook wb = new HSSFWorkbook(fs); // Документ MS Excel
+        HSSFSheet sheet = wb.getSheetAt(0); // Лист MS Excel
         HSSFRow row = null; // Строка
         HSSFCell cell = null; // Ячейка
         int rows = sheet.getPhysicalNumberOfRows(); // Получение числа строк
@@ -131,25 +131,25 @@ public class ExcelChanges {
             }
         }
         FileOutputStream fileOut = new FileOutputStream(outputFileName); // Поток для записи в файл
-        wb.write(fileOut); // Сохранение данных в документе MS ExcelChanges на диске
+        wb.write(fileOut); // Сохранение данных в документе MS Excel на диске
         fileOut.close(); // Закрытие файлового потока
     }
 
     /**
-     * Извлечение данных из документа MS ExcelChanges
+     * Извлечение данных из документа MS Excel
      *
-     * @param fileName имя файла MS ExcelChanges
+     * @param fileName имя файла MS Excel
      * @throws FileNotFoundException
      * @throws IOException
      */
     void extractor(String fileName) throws FileNotFoundException, IOException {
         InputStream in = new FileInputStream(fileName); // Поток чтения из файла
-        HSSFWorkbook wb = new HSSFWorkbook(in); // Документ MS ExcelChanges
+        HSSFWorkbook wb = new HSSFWorkbook(in); // Документ MS Excel
         ExcelExtractor extractor = new ExcelExtractor(wb); // Извлекатель данных
         extractor.setFormulasNotResults(false); // Считать значение формул
-        extractor.setIncludeSheetNames(false); // Не считывать название листов книги MS ExcelChanges
-        String text = extractor.getText(); // Получить содержимое документа MS ExcelChanges
-        System.out.println(text); // Вывод содержимого документа MS ExcelChanges на экран
+        extractor.setIncludeSheetNames(false); // Не считывать название листов книги MS Excel
+        String text = extractor.getText(); // Получить содержимое документа MS Excel
+        System.out.println(text); // Вывод содержимого документа MS Excel на экран
     }
 
     public static void main(String... args) {
@@ -157,11 +157,11 @@ public class ExcelChanges {
             String dir = new File(".").getAbsoluteFile().getParentFile().getAbsolutePath()
                     + System.getProperty("file.separator"); // Узнаем текущий каталог
             ExcelChanges excel = new ExcelChanges();
-            excel.writeData(dir + "input.xls"); // Создание на диске документа MS ExcelChanges
-            excel.modifData(dir + "input.xls", dir + "output.xls"); // Модификация данных в документе MS ExcelChanges
-            System.out.println(excel.readData(dir + "output.xls")); // Вывод содержимого документа MS ExcelChanges на экран
-            excel.extractor(dir + "output.xls"); // Извлечение данных из документа MS ExcelChanges
-            Desktop.getDesktop().open(new File(dir + "output.xls")); // Запуск документа в MS ExcelChanges
+            excel.writeData(dir + "input.xls"); // Создание на диске документа MS Excel
+            excel.modifData(dir + "input.xls", dir + "output.xls"); // Модификация данных в документе MS Excel
+            System.out.println(excel.readData(dir + "output.xls")); // Вывод содержимого документа MS Excel на экран
+            excel.extractor(dir + "output.xls"); // Извлечение данных из документа MS Excel
+            Desktop.getDesktop().open(new File(dir + "output.xls")); // Запуск документа в MS Excel
         } catch (IOException ex) {
             System.err.println("Error!");
         }
