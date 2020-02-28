@@ -7,13 +7,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import org.apache.poi.hssf.usermodel.HSSFCell;
-import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 public class ReceiptExcel extends javax.swing.JFrame {
+    private static final long serialVersionUID = 1L;
 
     class TThread1 extends Thread { // Поток запуска MS Excel
 
@@ -26,8 +25,8 @@ public class ReceiptExcel extends javax.swing.JFrame {
                         jTextField_SummUS.getText()); // Вызов метода создания отчета
                 Desktop.getDesktop().open(new File(dir + "receipt.xls")); // Запуск отчета в MS Excel
             } catch (Exception ex) {
-                ex.printStackTrace();
                 System.err.println("Error modifData!");
+                ex.printStackTrace();
             }
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
         }
@@ -41,8 +40,6 @@ public class ReceiptExcel extends javax.swing.JFrame {
         POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(inputFileName)); // Файл-шаблон MS Excel
         HSSFWorkbook wb = new HSSFWorkbook(fs); // Документ MS Excel
         HSSFSheet sheet = wb.getSheetAt(0); // Первый лист в документе MS Excel
-        //HSSFRow row; // Строка
-        //HSSFCell cell; // Ячейка
 
         sheet.getRow(12).getCell(3).setCellValue(FIO);
         sheet.getRow(13).getCell(3).setCellValue(Adress);

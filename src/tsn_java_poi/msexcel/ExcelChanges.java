@@ -21,8 +21,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import static java.lang.System.exit;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.poi.hssf.extractor.ExcelExtractor;
 import org.apache.poi.ss.usermodel.CellType;
 import static org.apache.poi.ss.usermodel.CellType.NUMERIC;
