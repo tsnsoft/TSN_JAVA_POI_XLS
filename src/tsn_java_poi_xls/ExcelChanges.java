@@ -1,4 +1,4 @@
-package tsn_java_poi.msexcel;
+package tsn_java_poi_xls;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;

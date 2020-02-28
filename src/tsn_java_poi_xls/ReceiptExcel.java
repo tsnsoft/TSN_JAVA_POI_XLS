@@ -1,4 +1,4 @@
-package tsn_java_poi.msexcel;
+package tsn_java_poi_xls;
 
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -77,28 +77,28 @@ public class ReceiptExcel extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(620, 370, 71, 27);
+        jButton1.setBounds(620, 370, 67, 23);
 
         jTextField_FIO.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         getContentPane().add(jTextField_FIO);
-        jTextField_FIO.setBounds(150, 247, 550, 27);
+        jTextField_FIO.setBounds(150, 247, 550, 21);
 
         jTextField_Adress.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField_Adress.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(jTextField_Adress);
-        jTextField_Adress.setBounds(150, 270, 550, 27);
+        jTextField_Adress.setBounds(150, 270, 550, 21);
 
         jTextField_SumPL.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField_SumPL.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(jTextField_SumPL);
-        jTextField_SumPL.setBounds(150, 295, 50, 27);
+        jTextField_SumPL.setBounds(150, 295, 50, 21);
 
         jTextField_SummUS.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jTextField_SummUS.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(jTextField_SummUS);
-        jTextField_SummUS.setBounds(460, 295, 60, 27);
+        jTextField_SummUS.setBounds(460, 295, 60, 21);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tsn_java_poi/msexcel/receipt.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/tsn_java_poi_xls/receipt.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(0, 0, 710, 410);
@@ -120,7 +120,7 @@ public class ReceiptExcel extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
