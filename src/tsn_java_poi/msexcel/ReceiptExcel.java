@@ -26,6 +26,7 @@ public class ReceiptExcel extends javax.swing.JFrame {
                         jTextField_SummUS.getText()); // Вызов метода создания отчета
                 Desktop.getDesktop().open(new File(dir + "receipt.xls")); // Запуск отчета в MS Excel
             } catch (Exception ex) {
+                ex.printStackTrace();
                 System.err.println("Error modifData!");
             }
             setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
@@ -40,28 +41,17 @@ public class ReceiptExcel extends javax.swing.JFrame {
         POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(inputFileName)); // Файл-шаблон MS Excel
         HSSFWorkbook wb = new HSSFWorkbook(fs); // Документ MS Excel
         HSSFSheet sheet = wb.getSheetAt(0); // Первый лист в документе MS Excel
-        HSSFRow row; // Строка
-        HSSFCell cell; // Ячейка
+        //HSSFRow row; // Строка
+        //HSSFCell cell; // Ячейка
 
-        row = sheet.getRow(12); // Выбираем строку
-        cell = row.getCell(3);  // Выбираем столбец стоки
-        cell.setCellValue(FIO); // Устанавливаем значение ячейки [D13]: (4,13)
-
-        row = sheet.getRow(13);
-        cell = row.getCell(3);
-        cell.setCellValue(Adress);
-        row = sheet.getRow(14);
-        cell = row.getCell(3);
-        cell.setCellValue(SummPL);
-        row = sheet.getRow(14);
-        cell = row.getCell(8);
-        cell.setCellValue(SummUS);
+        sheet.getRow(12).getCell(3).setCellValue(FIO);
+        sheet.getRow(13).getCell(3).setCellValue(Adress);
+        sheet.getRow(14).getCell(3).setCellValue(SummPL);
+        sheet.getRow(14).getCell(8).setCellValue(SummUS);
 
         int sum = Integer.parseInt(SummPL) + Integer.parseInt(SummUS);
-
-        row = sheet.getRow(15);
-        cell = row.getCell(3);
-        cell.setCellValue(sum);
+        sheet.getRow(15).getCell(3).setCellValue(sum);
+        
         try (FileOutputStream fileOut = new FileOutputStream(outputFileName)) {
             wb.write(fileOut);
         }
