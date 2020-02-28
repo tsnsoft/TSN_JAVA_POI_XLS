@@ -7,11 +7,9 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
-
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
-
 import java.io.FileInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,24 +25,15 @@ import static org.apache.poi.ss.usermodel.CellType.NUMERIC;
 
 public class ExcelChanges {
 
-    /**
-     * Чтение данных из документа MS Excel
-     *
-     * @param filename имя файла для чтения
-     * @return
-     */
     String readData(String filename) {
-
         String result = ""; // Строка со значениями из таблицы MS Excel
         HSSFWorkbook wb = null; // Рабочая книга MS Excel
-
         try {
             wb = new HSSFWorkbook(new FileInputStream(filename)); // Подключение к MS Excel
         } catch (IOException e) {
             System.err.println("File not found!");
             exit(-1); // Выход при ошибке доступа к файлу
         }
-
         Sheet sheet = wb.getSheetAt(0); // Лист Excel
         Iterator<Row> it = sheet.iterator(); // Итератор строк (цикл по строкам)
         while (it.hasNext()) { // Цикл по строкам текущего листа
@@ -75,11 +64,6 @@ public class ExcelChanges {
         return result;
     }
 
-    /**
-     * Запись данных в документ MS Excel
-     *
-     * @param filename имя файла для записи
-     */
     void writeData(String filename) {
         HSSFWorkbook workbook = new HSSFWorkbook(); // Документ MS Excel
         Sheet sheet = workbook.createSheet(); // Лист MS Excel
@@ -95,7 +79,6 @@ public class ExcelChanges {
                 cell.setCellType(NUMERIC); // Установка типа ячейки
             }
         }
-
         try {
             FileOutputStream out = new FileOutputStream(filename); // Поток для записи данных
             workbook.write(out); // Запись данных в MS Excel
@@ -105,16 +88,8 @@ public class ExcelChanges {
 
     }
 
-    /**
-     * Изменение данных в документе MS Excel
-     *
-     * @param inputFileName входной файл
-     * @param outputFileName выходной файл
-     * @throws IOException
-     */
     void modifData(String inputFileName, String outputFileName) throws IOException {
-        POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(inputFileName));
-        HSSFWorkbook wb = new HSSFWorkbook(fs); // Документ MS Excel
+        HSSFWorkbook wb = new HSSFWorkbook(new POIFSFileSystem(new FileInputStream(inputFileName))); // Документ MS Excel
         HSSFSheet sheet = wb.getSheetAt(0); // Лист MS Excel
         HSSFRow row = null; // Строка
         HSSFCell cell = null; // Ячейка
@@ -133,16 +108,8 @@ public class ExcelChanges {
         fileOut.close(); // Закрытие файлового потока
     }
 
-    /**
-     * Извлечение данных из документа MS Excel
-     *
-     * @param fileName имя файла MS Excel
-     * @throws FileNotFoundException
-     * @throws IOException
-     */
     void extractor(String fileName) throws FileNotFoundException, IOException {
-        InputStream in = new FileInputStream(fileName); // Поток чтения из файла
-        HSSFWorkbook wb = new HSSFWorkbook(in); // Документ MS Excel
+        HSSFWorkbook wb = new HSSFWorkbook(new FileInputStream(fileName)); // Документ MS Excel
         ExcelExtractor extractor = new ExcelExtractor(wb); // Извлекатель данных
         extractor.setFormulasNotResults(false); // Считать значение формул
         extractor.setIncludeSheetNames(false); // Не считывать название листов книги MS Excel
