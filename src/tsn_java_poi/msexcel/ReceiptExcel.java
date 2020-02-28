@@ -32,21 +32,17 @@ public class ReceiptExcel extends javax.swing.JFrame {
         }
     }
 
-    Thread tThread1; // Переменная-поток
-
+    // Метод создания отчета
     private void modifData(String inputFileName, String outputFileName, String FIO, String Adress,
             String SummPL, String SummUS) throws IOException {
-        // Метод создания отчета
-        POIFSFileSystem fs = new POIFSFileSystem(new FileInputStream(inputFileName)); // Файл-шаблон MS Excel
-        HSSFWorkbook wb = new HSSFWorkbook(fs); // Документ MS Excel
-        HSSFSheet sheet = wb.getSheetAt(0); // Первый лист в документе MS Excel
+        int sum = Integer.parseInt(SummPL) + Integer.parseInt(SummUS);
 
+        HSSFWorkbook wb = new HSSFWorkbook(new POIFSFileSystem(new FileInputStream(inputFileName))); // Документ MS Excel
+        HSSFSheet sheet = wb.getSheetAt(0); // Первый лист в документе MS Excel
         sheet.getRow(12).getCell(3).setCellValue(FIO);
         sheet.getRow(13).getCell(3).setCellValue(Adress);
         sheet.getRow(14).getCell(3).setCellValue(SummPL);
         sheet.getRow(14).getCell(8).setCellValue(SummUS);
-
-        int sum = Integer.parseInt(SummPL) + Integer.parseInt(SummUS);
         sheet.getRow(15).getCell(3).setCellValue(sum);
         
         try (FileOutputStream fileOut = new FileOutputStream(outputFileName)) {
