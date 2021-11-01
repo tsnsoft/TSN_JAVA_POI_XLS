@@ -23,7 +23,12 @@ public class ReceiptExcel extends javax.swing.JFrame {
                 modifData(dir + "receipt_template.xls", dir + "receipt.xls", jTextField_FIO.getText(),
                         jTextField_Adress.getText(), jTextField_SumPL.getText(),
                         jTextField_SummUS.getText()); // Вызов метода создания отчета
-                Desktop.getDesktop().open(new File(dir + "receipt.xls")); // Запуск отчета в MS Excel
+                if (System.getProperty("os.name").equals("Linux")
+                        && System.getProperty("java.vendor").startsWith("Red Hat")) {
+                    new ProcessBuilder("xdg-open", dir + "receipt.xls").start();
+                } else {
+                    Desktop.getDesktop().open(new File(dir + "receipt.xls")); // Запуск отчета в MS Excel
+                }
             } catch (Exception ex) {
                 System.err.println("Error modifData!");
                 ex.printStackTrace();
